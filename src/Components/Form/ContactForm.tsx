@@ -20,6 +20,18 @@ import BeautifulAutocomplete from "./FormSubComponents/BeautifulAutocomplete";
 const today = new Date();
 const defaultPreference = "Work from Home";
 
+const paperInputStyle = {
+  "& .MuiOutlinedInput-root": {
+    "& > fieldset": { border: "1px solid", borderColor: "primary.main" },
+    "&:hover": {
+      "& > fieldset": { borderColor: "primary.light" },
+    },
+  },
+  "& .MuiFormLabel-root": {
+    color: "primary.dark",
+  },
+};
+
 export default function ContactForm() {
   const getDefaultFormValues = () => {
     return {
@@ -95,7 +107,7 @@ export default function ContactForm() {
 
   return (
     <>
-      <Paper>
+      <Paper sx={paperInputStyle}>
         <form>
           <FormControl>
             <FormGroup row sx={{ padding: 2, justifyContent: "space-between" }}>
