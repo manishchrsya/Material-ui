@@ -15,7 +15,8 @@ export default function BeautifulTextComponent(props: {
         marginRight: 2,
         zIndex: "drawer",
         "& .MuiInputBase-root": {
-          height: 80,
+          // height: 80,
+          // fontSize: 20,
         },
         "& .MuiOutlinedInput-root.Mui-focused": {
           "& > fieldset": {
@@ -27,18 +28,6 @@ export default function BeautifulTextComponent(props: {
             borderColor: "orange",
           },
         },
-        // marginBottom: { xs: 2, md: 0 },
-        // marginRight: { md: 2 },
-        // "&: .MuiOutlinedInput-root.Mui-focused": {
-        //   "& > fieldset": {
-        //     borderColor: "primary.dark",
-        //   },
-        // },
-        // "&: .MuiOutlinedInput-root:hover": {
-        //   "& > fieldset.MuiOutlinedInput-notchedOutline": {
-        //     borderColor: "orange",
-        //   },
-        // },
       }}
       {...props}
     />

@@ -2,11 +2,14 @@ import {
   Alert,
   AlertTitle,
   Button,
+  Checkbox,
   Dialog,
   FormControl,
-  FormGroup,
+  ListItemText,
+  MenuItem,
   Paper,
   Stack,
+  useTheme,
 } from "@mui/material";
 
 import { contactData, FormValues } from "../../Data/ContactData";
@@ -16,9 +19,12 @@ import BeautifulSelect from "./FormSubComponents/BeautifulSelect";
 import BeautifulDesktopDatePicker from "./FormSubComponents/BeautifulDesktopDatePicker";
 import BeautifulRadios from "./FormSubComponents/BeautifulRadios";
 import BeautifulAutocomplete from "./FormSubComponents/BeautifulAutocomplete";
+import { StyledFormGroup } from "./FormSubComponents/StyledFormGroup";
 
 const today = new Date();
 const defaultPreference = "Work from Home";
+
+const skills = ["React", "Angular", "Python", "NodeJs", "Machine Learning"];
 
 const paperInputStyle = {
   "& .MuiOutlinedInput-root": {
@@ -33,6 +39,8 @@ const paperInputStyle = {
 };
 
 export default function ContactForm() {
+  const theme = useTheme();
+
   const getDefaultFormValues = () => {
     return {
       id: contactData.length + 1,
@@ -107,10 +115,22 @@ export default function ContactForm() {
 
   return (
     <>
-      <Paper sx={paperInputStyle}>
+      <Paper sx={paperInputStyle}></Paper>
+      <Paper
+        sx={{
+          ...paperInputStyle,
+          margin: { xs: 1, sm: 2 },
+          color: "yellow",
+          zIndex: theme.zIndex.appBar,
+          "&:hover": {
+            backgroundColor: "rgba(0,0,0,0.1)",
+          },
+          backgroundColor: "grid.dark",
+        }}
+      >
         <form>
           <FormControl>
-            <FormGroup row sx={{ padding: 2, justifyContent: "space-between" }}>
+            <StyledFormGroup row paddingTop={10}>
               <BeautifulTextComponent
                 value={formValues.name}
                 onChange={handleTextFieldChange}
@@ -119,29 +139,55 @@ export default function ContactForm() {
                 onInputChange={handleAutoCompleteChange}
                 value={formValues.role || ""}
               />
-            </FormGroup>
-            <FormGroup row sx={{ padding: 2, justifyContent: "space-between" }}>
+            </StyledFormGroup>
+            <StyledFormGroup row>
               <BeautifulSelect
                 onChange={handleSelectChange}
                 value={formValues.skills}
-              />
+              >
+                {skills.map((skillName) => {
+                  return (
+                    <MenuItem value={skillName} key={skillName}>
+                      <Checkbox
+                        checked={formValues.skills?.includes(skillName)}
+                      />
+                      <ListItemText primary={skillName} />
+                    </MenuItem>
+                  );
+                })}
+              </BeautifulSelect>
               <BeautifulDesktopDatePicker
                 value={formValues.startDate}
                 onChange={handleDatePickerChange}
               />
-            </FormGroup>
-            <FormGroup row sx={{ padding: 2, justifyContent: "space-between" }}>
+            </StyledFormGroup>
+            <StyledFormGroup row>
               <BeautifulRadios
                 onChange={handleRadioChange}
                 value={formValues.preference}
               />
-              <Stack>
-                <Button onClick={handleSubmit} variant="contained">
+              <Stack
+                direction="column"
+                justifyContent="space-around"
+                alignItems="center"
+                sx={{ minWidth: 300 }}
+              >
+                <Button
+                  onClick={handleSubmit}
+                  variant="contained"
+                  sx={{ height: 56, width: 100 }}
+                >
                   Submit
                 </Button>
-                <Button onClick={handleClear}>Clear</Button>
+                <Button
+                  variant="beautiful"
+                  onClick={handleClear}
+                  sx={{ height: 56, width: 100 }}
+                >
+                  Clear
+                </Button>
               </Stack>
-            </FormGroup>
+            </StyledFormGroup>
           </FormControl>
         </form>
       </Paper>

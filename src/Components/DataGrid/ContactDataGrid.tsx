@@ -1,7 +1,11 @@
 import { DataGrid, GridRenderCellParams } from "@mui/x-data-grid";
 import { contactData } from "../../Data/ContactData";
-import { Theme } from "@mui/material";
+import { Box, Button, Theme } from "@mui/material";
 import { useTheme } from "@emotion/react";
+
+const handlePrintClick = (cellValue: any) => {
+  console.log("cellValue", cellValue);
+};
 
 const columns = (theme: Theme) => [
   {
@@ -9,7 +13,13 @@ const columns = (theme: Theme) => [
     headerName: "Name",
     minWidth: 150,
     renderCell: (cellValue: GridRenderCellParams) => {
-      return <div>{cellValue.value}</div>;
+      return (
+        <Box
+          sx={{ color: "primary.main", fontSize: "18px", fontWeight: "bold" }}
+        >
+          {cellValue.value}
+        </Box>
+      );
     },
   },
   {
@@ -46,6 +56,20 @@ const columns = (theme: Theme) => [
     minWidth: 150,
     renderCell: (cellValue: GridRenderCellParams) => {
       return <div>{cellValue.value}</div>;
+    },
+  },
+  {
+    field: "Print",
+    renderCell: (cellValue: GridRenderCellParams) => {
+      return (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => handlePrintClick(cellValue)}
+        >
+          Print
+        </Button>
+      );
     },
   },
 ];

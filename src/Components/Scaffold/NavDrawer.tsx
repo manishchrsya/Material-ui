@@ -7,13 +7,14 @@ import {
   Toolbar,
   useTheme,
   Typography,
+  ThemeProvider,
 } from "@mui/material";
 import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
 import ContactForm from "../Form/ContactForm";
 import ContactCardGrid from "../Grid/ContactCardGrid";
 import ContactTable from "../Table/ContactTable";
 import ContactDataGrid from "../DataGrid/ContactDataGrid";
-import { MaximizeTwoTone } from "@mui/icons-material";
+import { BeautifulTheme } from "../../Theme/BeautifulTheme";
 
 const drawerWidth = 240;
 
@@ -84,13 +85,15 @@ export default function NavDrawer() {
         </Drawer>
         <main style={simpleStyles.content}>
           <Toolbar />
-          <Routes>
-            <Route path={"/"} element={<ContactForm />} />
-            <Route path={"/form"} element={<ContactForm />} />
-            <Route path={"/grid"} element={<ContactCardGrid />} />
-            <Route path={"/table"} element={<ContactTable />} />
-            <Route path={"/datagrid"} element={<ContactDataGrid />} />
-          </Routes>
+          <ThemeProvider theme={BeautifulTheme}>
+            <Routes>
+              <Route path={"/"} element={<ContactForm />} />
+              <Route path={"/form"} element={<ContactForm />} />
+              <Route path={"/grid"} element={<ContactCardGrid />} />
+              <Route path={"/table"} element={<ContactTable />} />
+              <Route path={"/datagrid"} element={<ContactDataGrid />} />
+            </Routes>
+          </ThemeProvider>
         </main>
       </div>
     </BrowserRouter>

@@ -1,4 +1,5 @@
 import {
+  FormControl,
   FormControlLabel,
   FormGroup,
   FormLabel,
@@ -11,27 +12,27 @@ export default function BeautifulRadios(props: {
   onChange: (event: any) => void;
 }) {
   return (
-    <FormGroup sx={{ minWidth: 300, marginRight: 2 }}>
-      <FormLabel component={"legend"}>Work Preference</FormLabel>
-      <RadioGroup
-        {...props}
-        id="preference-type-radio"
-        name="preference"
-        // onChange={handleRadioChange}
-        // value={formValues.preference}
-      >
-        <FormControlLabel
-          control={<Radio />}
-          label="Work from Home"
-          value={"Work from Home"}
-        />
-        <FormControlLabel control={<Radio />} label="Hybrid" value={"Hybrid"} />
-        <FormControlLabel
-          control={<Radio />}
-          label="In Office"
-          value={"In Office"}
-        />
-      </RadioGroup>
-    </FormGroup>
+    <FormControl disabled>
+      <FormGroup sx={{ minWidth: 300, marginRight: 2 }}>
+        <FormLabel component={"legend"}>Work Preference</FormLabel>
+        <RadioGroup {...props} id="preference-type-radio" name="preference">
+          <FormControlLabel
+            control={<Radio />}
+            label="Work from Home"
+            value={"Work from Home"}
+          />
+          <FormControlLabel
+            control={<Radio />}
+            label="Hybrid"
+            value={"Hybrid"}
+          />
+          <FormControlLabel
+            control={<Radio />}
+            label="In Office"
+            value={"In Office"}
+          />
+        </RadioGroup>
+      </FormGroup>
+    </FormControl>
   );
 }

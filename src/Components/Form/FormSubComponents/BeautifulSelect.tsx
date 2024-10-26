@@ -1,9 +1,26 @@
-import { ListItemText, MenuItem, Select } from "@mui/material";
-const skills = ["React", "Angular", "Python", "NodeJs", "Machine Learning"];
+import { Select } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 
-export default function BeautifulSelect(props: { value: any; onChange: any }) {
+export default function BeautifulSelect(props: {
+  value: any;
+  onChange: any;
+  children: any;
+}) {
+  const selectInputComponent = useRef<HTMLInputElement>(null);
+
+  const [position, setPosition] = useState(0);
+
+  useEffect(() => {
+    setPosition(
+      selectInputComponent.current
+        ? selectInputComponent.current.getBoundingClientRect().left + 20
+        : 0
+    );
+  }, [selectInputComponent]);
+
   return (
     <Select
+      ref={selectInputComponent}
       {...props}
       id="skill-select"
       sx={{ minWidth: 300, marginRight: 2 }}
@@ -11,14 +28,15 @@ export default function BeautifulSelect(props: { value: any; onChange: any }) {
         return [select].join(",");
       }}
       multiple
+      MenuProps={{
+        PaperProps: {
+          sx: {
+            left: `${position}px !important`,
+          },
+        },
+      }}
     >
-      {skills.map((skillName) => {
-        return (
-          <MenuItem value={skillName} key={skillName}>
-            <ListItemText primary={skillName} />
-          </MenuItem>
-        );
-      })}
+      {props.children}
     </Select>
   );
 }
