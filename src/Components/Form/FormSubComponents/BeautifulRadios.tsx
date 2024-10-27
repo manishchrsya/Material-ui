@@ -13,7 +13,16 @@ export default function BeautifulRadios(props: {
 }) {
   return (
     <FormControl disabled>
-      <FormGroup sx={{ minWidth: 300, marginRight: 2 }}>
+      <FormGroup
+        sx={{
+          minWidth: 300,
+          marginRight: 2,
+          marginBottom: {
+            xs: 2,
+            md: 0,
+          },
+        }}
+      >
         <FormLabel component={"legend"}>Work Preference</FormLabel>
         <RadioGroup {...props} id="preference-type-radio" name="preference">
           <FormControlLabel

@@ -1,10 +1,28 @@
-import { DataGrid, GridRenderCellParams } from "@mui/x-data-grid";
+import { GridRenderCellParams, GridToolbar } from "@mui/x-data-grid";
 import { contactData } from "../../Data/ContactData";
 import { Box, Button, Theme } from "@mui/material";
 import { useTheme } from "@emotion/react";
+import { DataGrid } from "@mui/x-data-grid";
 
 const handlePrintClick = (cellValue: any) => {
   console.log("cellValue", cellValue);
+};
+
+const dataGridSx = {
+  "& .MuiDataGrid-columnHeaders": {
+    fontWeight: "bold",
+    fontSize: "20px",
+  },
+  "& .MuiDataGrid-container--top [role=row]": {
+    backgroundColor: "primary.main",
+  },
+  "& .MuiDataGrid-virtualScrollerRenderZone": {
+    "& .MuiDataGrid-row": {
+      "&:nth-of-type(2n)": {
+        backgroundColor: "grid.main",
+      },
+    },
+  },
 };
 
 const columns = (theme: Theme) => [
@@ -83,7 +101,22 @@ export default function ContactDataGrid() {
         rowHeight={120}
         rows={contactData}
         columns={columns(theme as Theme)}
-      />
+        sx={dataGridSx}
+        slots={{
+          toolbar: () => (
+            <GridToolbar
+              sx={{
+                justifyContent: "flex-end",
+                "& button": { Border: "none" },
+                "& .MuiBox-root": { display: "none" },
+              }}
+            ></GridToolbar>
+          ),
+        }}
+        initialState={{
+          sorting: { sortModel: [{ field: "name", sort: "asc" }] },
+        }}
+      ></DataGrid>
     </div>
   );
 }

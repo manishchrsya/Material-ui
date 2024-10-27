@@ -23,7 +23,14 @@ export default function BeautifulSelect(props: {
       ref={selectInputComponent}
       {...props}
       id="skill-select"
-      sx={{ minWidth: 300, marginRight: 2 }}
+      sx={{
+        minWidth: 300,
+        marginRight: 2,
+        marginBottom: {
+          xs: 2,
+          md: 0,
+        },
+      }}
       renderValue={(select: string[]) => {
         return [select].join(",");
       }}

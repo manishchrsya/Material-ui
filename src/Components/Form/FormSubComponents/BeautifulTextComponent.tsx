@@ -13,11 +13,15 @@ export default function BeautifulTextComponent(props: {
       sx={{
         minWidth: 300,
         marginRight: 2,
-        zIndex: "drawer",
-        "& .MuiInputBase-root": {
-          // height: 80,
-          // fontSize: 20,
+        marginBottom: {
+          xs: 2,
+          md: 0,
         },
+        // zIndex: "drawer",
+        // "& .MuiInputBase-root": {
+        // height: 80,
+        // fontSize: 20,
+        // },
         "& .MuiOutlinedInput-root.Mui-focused": {
           "& > fieldset": {
             borderColor: "primary.dark",
